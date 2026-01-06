@@ -1,0 +1,20 @@
+@mcp
+interface WeatherService {
+    // Gets weather data for a location by coordinates
+    query func get_weather(
+        // latitude coordinate
+        latitude: string,
+        // longitude coordinate
+        longitude: string,
+        // start date (YYYY-MM-DD format)
+        start_date: string,
+        // end date (YYYY-MM-DD format)
+        end_date: string
+    ) -> result<string, string>;
+    
+    // Gets current temperature for a city (uses preset coordinates)
+    query func get_city_temperature(
+        // city name (London, NewYork, Tokyo, Paris, Berlin)
+        city: string
+    ) -> result<string, string>
+}

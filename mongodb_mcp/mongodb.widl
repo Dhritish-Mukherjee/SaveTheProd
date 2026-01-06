@@ -1,0 +1,22 @@
+record MongoDBConfig {
+    connection_string: string,
+    database_name: string,
+    collection_name: string
+}
+
+@mcp
+interface MongoDB {
+    config -> MongoDBConfig;
+    
+    // Stores a name in MongoDB
+    query func store_name(name: string) -> result<string, string>;
+    
+    // Retrieves a name by ID
+    query func get_name(id: string) -> result<string, string>;
+    
+    // Lists all stored names
+    query func list_names() -> result<list<string>, string>;
+    
+    // Deletes a name by ID
+    query func delete_name(id: string) -> result<string, string>
+}

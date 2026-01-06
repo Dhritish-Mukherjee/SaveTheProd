@@ -1,0 +1,47 @@
+@mcp
+interface IncidentTracker {
+    // Creates new incident record on-chain
+    mutate func create_incident(
+        // incident description
+        description: string,
+        // severity P0-P3
+        severity: string,
+        // affected service
+        service: string,
+        // reporter name
+        reporter: string,
+        // timestamp
+        timestamp: string
+    ) -> result<string, string>;
+    
+    // Logs action taken during incident
+    mutate func log_action(
+        // incident ID
+        incident_id: string,
+        // action type (notified, escalated, resolved)
+        action_type: string,
+        // action details JSON
+        details: string,
+        // timestamp
+        timestamp: string
+    ) -> result<string, string>;
+    
+    // Updates incident status
+    mutate func update_status(
+        // incident ID
+        incident_id: string,
+        // new status (investigating, resolved, closed)
+        status: string,
+        // resolution notes
+        notes: string
+    ) -> result<string, string>;
+    
+    // Retrieves complete incident timeline
+    query func get_incident_timeline(
+        // incident ID
+        incident_id: string
+    ) -> result<string, string>;
+    
+    // Gets all active incidents
+    query func get_active_incidents() -> result<string, string>
+}

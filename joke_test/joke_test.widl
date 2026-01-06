@@ -1,0 +1,4 @@
+@mcp
+interface JokeTest {
+    query func get_joke() -> result<string, string>
+}

@@ -1,0 +1,45 @@
+record NotificationConfig {
+    slack_webhook_url: string,
+    twilio_account_sid: string,
+    twilio_auth_token: string,
+    twilio_phone: string,
+    smtp_host: string,
+    smtp_port: string
+}
+
+@mcp
+interface NotificationHub {
+    config -> NotificationConfig;
+    
+    // Sends Slack notification to webhook
+    query func send_slack(
+        // message content with formatting
+        message: string,
+        // severity level for color coding
+        severity: string
+    ) -> result<string, string>;
+    
+    // Sends SMS via Twilio
+    query func send_sms(
+        // recipient phone number with country code
+        phone: string,
+        // SMS content
+        message: string
+    ) -> result<string, string>;
+    
+    // Sends email alert
+    query func send_email(
+        // recipient email
+        to: string,
+        // email subject
+        subject: string,
+        // email body
+        body: string
+    ) -> result<string, string>;
+    
+    // Creates war room link for P0 incidents
+    query func create_war_room(
+        // incident ID for room name
+        incident_id: string
+    ) -> result<string, string>
+}

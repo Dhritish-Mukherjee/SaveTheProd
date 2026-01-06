@@ -1,0 +1,38 @@
+record DiscordConfig {
+    webhook_url: string
+}
+
+@mcp
+interface DiscordNotifier {
+    config -> DiscordConfig;
+    
+    // Sends a message to Discord channel
+    query func send_message(
+        // the message content to send
+        content: string,
+        // optional username to display (default: Incident Bot)
+        username: string
+    ) -> result<string, string>;
+    
+    // Sends a formatted incident alert to Discord
+    query func send_incident_alert(
+        // incident ID
+        incident_id: string,
+        // incident severity P0-P3
+        severity: string,
+        // incident description
+        description: string,
+        // affected service name
+        service: string
+    ) -> result<string, string>;
+    
+    // Sends a status update to Discord
+    query func send_status_update(
+        // incident ID
+        incident_id: string,
+        // new status
+        status: string,
+        // update message
+        message: string
+    ) -> result<string, string>
+}

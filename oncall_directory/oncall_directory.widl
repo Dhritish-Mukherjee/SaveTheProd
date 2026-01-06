@@ -1,0 +1,29 @@
+record DirectoryConfig {
+    pagerduty_api_key: string,
+    api_endpoint: string
+}
+
+@mcp
+interface OncallDirectory {
+    config -> DirectoryConfig;
+    
+    // Gets current on-call engineer for a team
+    query func get_oncall_engineer(
+        // team name (backend, frontend, infra)
+        team: string
+    ) -> result<string, string>;
+    
+    // Gets escalation chain for severity
+    query func get_escalation_chain(
+        // team name
+        team: string,
+        // severity level P0-P3
+        severity: string
+    ) -> result<string, string>;
+    
+    // Gets team Slack channels
+    query func get_team_channels(
+        // team name
+        team: string
+    ) -> result<string, string>
+}

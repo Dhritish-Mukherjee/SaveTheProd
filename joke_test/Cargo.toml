@@ -1,0 +1,15 @@
+[package]
+name = "joke_test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+weil_rs = { path = "../wadk/adk/rust/weil_rs" }
+weil_macros = { path = "../wadk/adk/rust/weil_rs/weil_macros" }
+weil_contracts = { path = "../wadk/adk/rust/weil_rs/weil_contracts" }
+anyhow = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[lib]
+crate-type = ["cdylib"]
