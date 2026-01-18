@@ -1,5 +1,0 @@
-interface Counter {
-    init();
-    get_count() -> u64;
-    increment();
-}
